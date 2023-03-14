@@ -1,6 +1,5 @@
 import math
 import numpy as np
-import numpy_financial as npf
 
 
 def get_iwaa(age_list, income_list):
@@ -85,6 +84,10 @@ def get_absd(borrowers, property_price):
     return absd_rate, absd_amount
 
 
+def get_pv(rate, nper, pmt):
+    return pmt / rate*((1 + rate)**nper - 1) / (1 + rate)**nper
+
+
 def get_mandatory_cash(borrowers, property_price):
     existing_property_loans_list = [b['numberOfExistingPropertyLoans'] for b in borrowers]
     effective_property_loans = max(existing_property_loans_list)
@@ -150,11 +153,11 @@ def get_loan_and_property_options_summary_output(**kwargs):
     payment_ceiling = kwargs['amountAvailableForPropertyLoanInstalment']
     ltv_ratio = kwargs['ltvRatio']
     medium_term_interest_rate = kwargs['mediumTermInterestRate']
-    max_property_loan_amount_raw = npf.pv(
+    max_property_loan_amount_raw = get_pv(
         rate=medium_term_interest_rate / 12 / 100,
         nper=loan_tenure * 12,
-        pmt=-payment_ceiling,
-    ) # https://numpy.org/numpy-financial/latest/pv.html#numpy_financial.pv
+        pmt=payment_ceiling,
+    )
     max_property_loan_amount = math.floor(max_property_loan_amount_raw / 1000) * 1000
     highest_property_price_raw = max_property_loan_amount / ltv_ratio * 100
     highest_property_price = math.floor(highest_property_price_raw / 1000) * 1000
@@ -174,7 +177,7 @@ def get_loan_and_property_options_summary_output(**kwargs):
     }
 
 
-property_type_input = "EC"
+property_type_input = "private" # private, EC, HDB
 
 income_assessment_input = {
     "annualFixedIncome": 52000, # monthlyFixedIncome derived from annualFixedIncome
