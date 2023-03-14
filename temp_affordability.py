@@ -162,18 +162,19 @@ def get_loan_and_property_options_summary_output(**kwargs):
     highest_property_price_raw = max_property_loan_amount / ltv_ratio * 100
     highest_property_price = math.floor(highest_property_price_raw / 1000) * 1000
 
-    mandatory_cash = get_mandatory_cash(kwargs["borrowers"], highest_property_price)
-    cpf_oa = 0.2, highest_property_price * 0.2
+    cash_rate, cash_amount = get_mandatory_cash(kwargs["borrowers"], highest_property_price)
+    cpf_oa_rate = 1 - cash_rate - ltv_ratio / 100
+    cpf_oa = highest_property_price * cpf_oa_rate
     bsd = get_bsd(highest_property_price)
-    absd = get_absd(kwargs["borrowers"], highest_property_price)
+    absd_rate, absd_amount = get_absd(kwargs["borrowers"], highest_property_price)
 
     return {
         "maxPropertyLoanAmount": max_property_loan_amount,
         "highestAffordablePrice": highest_property_price,
-        "mandatoryCash": mandatory_cash,
-        "cpfOrdinaryAccount": cpf_oa,
+        "mandatoryCash": (cash_rate, cash_amount),
+        "cpfOrdinaryAccount": (cpf_oa_rate, cpf_oa),
         "bsd": bsd,
-        "additonalBsd": absd,
+        "additionalBsd": (absd_rate, absd_amount),
     }
 
 
