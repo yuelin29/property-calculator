@@ -67,9 +67,9 @@ def get_bsd(price):
 
 def get_absd(borrowers, property_price):
     absd_table = {
-        "Singaporean": [0, 0.17, 0.25],
-        "SPR": [0.05, 0.25, 0.3],
-        "Foreigner": [0.3, 0.3, 0.3],
+        "Singaporean": [0, 0.2, 0.3],
+        "SPR": [0.05, 0.3, 0.35],
+        "Foreigner": [0.6, 0.6, 0.6],
     }
     nationality_list = [b['nationality'] for b in borrowers]
     existing_property_count_list = [b['existingPropertyCount'] for b in borrowers]
@@ -181,30 +181,30 @@ def get_loan_and_property_options_summary_output(**kwargs):
 property_type_input = "private" # private, EC, HDB
 
 income_assessment_input = {
-    "annualFixedIncome": 52000, # monthlyFixedIncome derived from annualFixedIncome
-    "annualVariableIncome": 8000, # monthlyVariableIncome derived from annualVariableIncome
+    "annualFixedIncome": 120000, # monthlyFixedIncome derived from annualFixedIncome
+    "annualVariableIncome": 0, # monthlyVariableIncome derived from annualVariableIncome
     "annualRentalIncome": 0,
-    "pledgedDeposit": 50000,
-    "unpledgedDeposit": 50000
+    "pledgedDeposit": 0,
+    "unpledgedDeposit": 0
 }
 
 
 income_assessment_input_2 = {
-    "annualFixedIncome": 60000, # monthlyFixedIncome derived from annualFixedIncome
-    "annualVariableIncome": 6000, # monthlyVariableIncome derived from annualVariableIncome
+    "annualFixedIncome": 14000 * 12, # monthlyFixedIncome derived from annualFixedIncome
+    "annualVariableIncome": 14000, # monthlyVariableIncome derived from annualVariableIncome
     "annualRentalIncome": 0,
-    "pledgedDeposit": 50000,
+    "pledgedDeposit": 0,
     "unpledgedDeposit": 0
 }
 
 
 debt_assessment_input = {
-    "numberOfExistingPropertyLoans": 1,
-    "monthlyCarLoan": 1556,
-    "monthlyPropertyLoanInstalment": 0,
+    "numberOfExistingPropertyLoans": 0,
+    "monthlyCarLoan": 0,
+    "monthlyPropertyLoanInstalment": 4200,
     "monthlyUnsecuredCredit": 0,
     "monthlySecuredRevolvingDebt": 0,
-    "guarantorDebt": 685
+    "guarantorDebt": 0
 }
 
 debt_assessment_input_2 = {
@@ -227,7 +227,7 @@ borrower_1 = {
 }
 
 borrower_2 = {
-    "age": 28,
+    "age": 30,
     "nationality": "Singaporean",
     "incomeUsedForCalculation": get_income_assessment_output(**income_assessment_input_2)['incomeUsedForCalculation'],
     "numberOfExistingPropertyLoans": 0,
@@ -241,7 +241,7 @@ financial_position_summary_input = {
     "propertyType": property_type_input,
     "borrowers": [
         borrower_1,
-        borrower_2,
+        #borrower_2,
     ]
 }
 
@@ -253,7 +253,7 @@ loan_and_property_options_summary_input = {
     "mediumTermInterestRate": 4,
     "borrowers": [
         borrower_1,
-        borrower_2,
+        #borrower_2,
     ]
 }
 
