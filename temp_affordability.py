@@ -70,6 +70,7 @@ def get_absd(borrowers, property_price):
         "Singaporean": [0, 0.2, 0.3],
         "SPR": [0.05, 0.3, 0.35],
         "Foreigner": [0.6, 0.6, 0.6],
+        "Entity": [0.65, 0.65, 0.65],
     }
     nationality_list = [b['nationality'] for b in borrowers]
     existing_property_count_list = [b['existingPropertyCount'] for b in borrowers]
