@@ -13,7 +13,10 @@ AVD_RATE = [
     (20000000, (0, 0.0375)),
     (21739120, (750000, 0.1)),
     (21739121, (0, 0.0425)),
-]  # price upper limit, (absolute amount, tax rate on excess amount from previous price upper limit)
+]
+# for even number rows - price upper limit, (absolute amount, tax rate property price)
+# for odd number rows - price upper limit, (absolute amount, tax rate on excess amount from previous price upper limit)
+# source: https://www.habitat-property.com/en/articles/buying-property-in-hong-kong/an-expert-understanding-of-hong-kong-stamp-duties
 
 
 def get_avd(**kwargs):
@@ -61,9 +64,9 @@ get_avd(property_price=9000000, is_first_property=True, is_pr=True)
 get_avd(property_price=75000000, is_first_property=True, is_pr=True)
 
 get_bsd(property_price=3000000, is_pr=True)
-get_bsd(property_price=3500000, is_pr=True)
+get_bsd(property_price=3500000, is_pr=False)
 get_bsd(property_price=4500000, is_pr=True)
-get_bsd(property_price=5000000, is_pr=True)
+get_bsd(property_price=5000000, is_pr=False)
 get_bsd(property_price=6500000, is_pr=True)
-get_bsd(property_price=9000000, is_pr=True)
+get_bsd(property_price=9000000, is_pr=False)
 get_bsd(property_price=75000000, is_pr=True)
