@@ -1,6 +1,8 @@
 import math
 import numpy as np
 
+from utils import get_pv
+
 
 def get_iwaa(age_list, income_list):
     iwaa = sum(np.array(age_list) * np.array(income_list)) / sum(income_list)
@@ -83,10 +85,6 @@ def get_absd(borrowers, property_price):
         absd_rate = max(absd_rate_temp, absd_rate)
     absd_amount = absd_rate * property_price
     return absd_rate, absd_amount
-
-
-def get_pv(rate, nper, pmt):
-    return pmt / rate*((1 + rate)**nper - 1) / (1 + rate)**nper
 
 
 def get_mandatory_cash(borrowers, property_price):
