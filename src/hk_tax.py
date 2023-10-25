@@ -35,7 +35,7 @@ def get_avd(**kwargs):
         else:
             return math.ceil(property_price * AVD_RATE[upper_limit_i][1][1] + AVD_RATE[upper_limit_i][1][0])
     else:
-        return math.ceil(property_price * 0.15)
+        return math.ceil(property_price * 0.075)
 
 
 def get_bsd(**kwargs):
@@ -48,7 +48,7 @@ def get_bsd(**kwargs):
     if is_pr:
         return 0
     else:
-        return math.ceil(property_price * 0.15)
+        return math.ceil(property_price * 0.075)
 
 
 get_avd(property_price=3000000, is_first_property=True, is_pr=True)
